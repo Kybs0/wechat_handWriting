@@ -1,0 +1,8 @@
+<view class="pageRoot">
+  <view class="btns">
+    <button catchtap="penHandWrite1" class="btn">笔迹（笔势）</button>
+    <button catchtap="penHandWrite2" class="btn">笔迹（正常）</button>
+    <button catchtap="pngModify" class="btn">图片编辑</button>
+    <button catchtap="pngComment" class="btn">批注</button>
+  </view>
+</view>

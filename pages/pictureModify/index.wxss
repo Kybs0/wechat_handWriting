@@ -1,0 +1,39 @@
+page {
+  background: #fbfbfb;
+  height: 100%;
+  overflow: hidden;
+}
+
+.picture-root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.body {
+  flex: 1 1 auto;
+  width: 100%;
+  position: relative;
+}
+/* 画布背景 */
+.pictureViewer {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 1;
+}
+
+/* 正常操作 */
+.normal_tools {
+  flex: 0 0 auto;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.normal_tools button {
+  padding: 2px 10px;
+  font-size: 12px;
+  color: #666;
+  line-height: 24px;
+}

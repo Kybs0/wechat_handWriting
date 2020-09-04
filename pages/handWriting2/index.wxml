@@ -1,0 +1,40 @@
+<!-- 笔迹（无笔势版本） -->
+<view class="handWriting2-container">
+    <!-- 画布工具区域 -->
+    <view class="canvas_tools">
+        <view class="penThicknessSetting">
+            <view id="pen1" class="penThickness {{lineWidth==5?'selectedBorder':''}}" bindtap="penSelect" data-param="5">
+                <view class="penThickness-inner">
+                    <view class='circle'></view>
+                </view>
+            </view>
+            <view id="pen2" class="penThickness {{lineWidth==10?'selectedBorder':''}}" bindtap="penSelect" data-param="10">
+                <view class="penThickness-inner">
+                    <view class='circle'></view>
+                </view>
+            </view>
+        </view>
+        <view class="penColorSetting">
+            <view id="color1" class="penColor {{penColor=='red'?'selectedBorder':''}}">
+                <view class="penColor-inner">
+                    <view class="colorValue" bindtap="colorSelect" data-param='red'></view>
+                </view>
+            </view>
+            <view id="color2" class="penColor {{penColor=='#fea700'?'selectedBorder':''}}">
+                <view class="penColor-inner">
+                    <view class="colorValue" bindtap="colorSelect" data-param='#fea700'></view>
+                </view>
+            </view>
+        </view>
+        <view class="operationsContainer">
+            <view class="operation {{isClear?'selectedBackground':''}}" bindtap="clearCanvas">
+                <image src='./images/eraser.png'></image>
+            </view>
+            <button catchtap="resetWriting" class="resetBtn">重置</button>
+            <button catchtap="saveWriting" class="subBtn">完成</button>
+        </view>
+    </view>
+    <view class="canvas_area">
+        <canvas canvas-id='{{canvasId}}' class="myCanvas" disable-scroll="false" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd"></canvas>
+    </view>
+</view>

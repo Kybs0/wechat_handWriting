@@ -1,0 +1,18 @@
+page {
+  background: #fbfbfb;
+  height: auto;
+  overflow: hidden;
+}
+
+.pageRoot {
+  margin-top: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pageRoot .btn {
+  margin-top: 20px;
+  padding: auto 40px;
+  font-size: 16px;
+  min-width: 120px;
+}

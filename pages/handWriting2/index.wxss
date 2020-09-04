@@ -1,0 +1,148 @@
+/* pages/draw.wxss */
+
+page {
+  height: 100%;
+  overflow: hidden;
+}
+
+.handWriting2-container {
+  height: 100%;
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+/* 画布 */
+.canvas_area {
+  flex: 1 1 auto;
+  width: 100%;
+}
+.canvas_area .myCanvas {
+  height: 100%;
+  width: 100%;
+  background-color: white;
+}
+/* 操作 */
+.canvas_tools {
+  flex: 0 0 auto;
+  height: 50px;
+  border-bottom: 1px dashed gainsboro;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+/* 笔粗细 */
+.penThicknessSetting {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.penThickness {
+  margin-left: 10px;
+  height: 26px;
+  width: 26px;
+  border-radius: 13px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.penThickness-inner {
+  height: 22px;
+  width: 22px;
+  border-radius: 11px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#pen1 .circle {
+  height: 5px;
+  width: 5px;
+  border-radius: 2.5px;
+  background-color: gainsboro;
+}
+#pen2 .circle {
+  height: 10px;
+  width: 10px;
+  border-radius: 5px;
+  background-color: gainsboro;
+}
+/* 颜色设置 */
+.penColorSetting {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.penColor {
+  margin-left: 10px;
+  height: 26px;
+  width: 26px;
+  border-radius: 13px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.penColor-inner {
+  height: 22px;
+  width: 22px;
+  border-radius: 11px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.colorValue {
+  height: 16px;
+  width: 16px;
+  border-radius: 8px;
+}
+#color1 .penColor-inner .colorValue {
+  background-color: red;
+}
+#color2 .penColor-inner .colorValue {
+  background-color: #fea700;
+}
+
+/* 保存操作 */
+.operationsContainer {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.operation {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+.operation image {
+  width: 20px;
+  height: 20px;
+}
+.resetBtn {
+  margin-left: 14px;
+  padding: 2px 10px;
+  font-size: 12px;
+  color: #666;
+}
+.subBtn {
+  margin-left: 14px;
+  padding: 2px 10px;
+  font-size: 12px;
+  background: #008ef6;
+}
+
+.selectedBorder {
+  background-color: rgb(89, 238, 89);
+}
+.selectedBackground {
+  background-color: gainsboro;
+}

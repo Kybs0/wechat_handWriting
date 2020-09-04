@@ -1,0 +1,53 @@
+<!-- 图片批注 -->
+<view class="picture-root">
+    <view class="normal_tools" style="display:{{isInEdit?'none':'flex'}}">
+        <button bind:tap="startEdit">批注</button>
+        <button bind:tap="exportPng" style="display:{{imagePath==originalImagePath?'none':'flex'}}">
+            导出
+        </button>
+    </view>
+    <view class="edit_tools" style="display:{{isInEdit?'flex':'none'}}">
+        <view class="penThicknessSetting">
+            <view id="pen1" class="penThickness {{lineWidth==5?'selectedBorder':''}}" bindtap="penSelect" data-param="5">
+                <view class="penThickness-inner">
+                    <view class='circle'></view>
+                </view>
+            </view>
+            <view id="pen2" class="penThickness {{lineWidth==10?'selectedBorder':''}}" bindtap="penSelect" data-param="10">
+                <view class="penThickness-inner">
+                    <view class='circle'></view>
+                </view>
+            </view>
+        </view>
+        <view class="penColorSetting">
+            <view id="color1" class="penColor {{penColor=='red'?'selectedBorder':''}}">
+                <view class="penColor-inner">
+                    <view class="colorValue" bindtap="colorSelect" data-param='red'></view>
+                </view>
+            </view>
+            <view id="color2" class="penColor {{penColor=='#fea700'?'selectedBorder':''}}">
+                <view class="penColor-inner">
+                    <view class="colorValue" bindtap="colorSelect" data-param='#fea700'></view>
+                </view>
+            </view>
+        </view>
+        <view class="operationsContainer">
+            <!-- 擦除有一定缺陷，只能使用一定颜色进行擦除 -->
+            <!-- <view class="operation {{isClear?'selectedBackground':''}}" bindtap="clearCanvas">
+                <image src='./images/eraser.png'></image>
+            </view> -->
+            <button catchtap="revertWriting" class="revertBtn">撤销</button>
+            <button catchtap="resetWriting" class="resetBtn">重置</button>
+            <button catchtap="endEdit">退出</button>
+            <button catchtap="saveWriting" class="subBtn">完成</button>
+        </view>
+    </view>
+    <view class="body">
+        <image class="pictureViewer" src="{{imagePath}}" style="display:{{isInEdit?'none':'flex'}}" />
+        <view class="canvas_area" style="display:{{isInEdit?'flex':'none'}}">
+            <canvas canvas-id='{{canvasId}}' class="myCanvas" disable-scroll="false" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd">
+                <!-- <image class="pictureViewer" src="{{imagePath}}" /> -->
+            </canvas>
+        </view>
+    </view>
+</view>

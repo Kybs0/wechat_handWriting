@@ -1,0 +1,67 @@
+page {
+  background: #fbfbfb;
+  height: auto;
+  overflow: hidden;
+}
+
+.wrapper {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.topMenus {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+/* 画笔设置 */
+.topMenus .penSettings {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+}
+.topMenus .penSettings image {
+  padding: 10px;
+  width: 20px;
+  height: 20px;
+}
+.topMenus .penSettings .color_select {
+  width: 30px;
+  height: 30px;
+}
+/* 操作 */
+.topMenus button {
+  margin: 0 0 0 20px;
+  padding: 0 20px;
+  font-size: 28rpx;
+}
+.topMenus .delBtn {
+  color: #666;
+}
+.topMenus .subBtn {
+  display: inline-flex;
+  background: #008ef6;
+  color: #fff;
+  text-align: center;
+  justify-content: center;
+}
+
+.body {
+  border-top: 1px dashed gainsboro;
+  overflow: hidden;
+  box-sizing: border-box;
+  flex: 1;
+}
+.body .handWriting {
+  background: #fff;
+  width: 100%;
+  height: 95vh;
+}

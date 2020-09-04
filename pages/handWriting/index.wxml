@@ -1,0 +1,14 @@
+<!-- 笔迹（笔势版本） -->
+<view class="wrapper">
+  <view class="topMenus">
+    <view class="penSettings">
+      <image catchtap="selectColorEvent" src="{{ selectColor === 'black' ? '../../images/color_black_selected.png' : '../../images/color_black.png' }}" class="{{selectColor === 'black' ? 'color_select' : '' }}" data-color="black" data-color-value="#1A1A1A"></image>
+      <image catchtap="selectColorEvent" src="{{ selectColor === 'red' ? '../../images/color_red_selected.png' : '../../images/color_red.png' }}" class="{{selectColor === 'red' ? 'color_select' : '' }}" data-color="red" data-color-value="#ca262a"></image>
+    </view>
+    <button catchtap="retDraw" class="delBtn">重置</button>
+    <button catchtap="subCanvas" class="subBtn">完成</button>
+  </view>
+  <view class="body">
+    <canvas class="handWriting" disable-scroll="true" bindtouchstart="uploadScaleStart" bindtouchmove="uploadScaleMove" bindtouchend="uploadScaleEnd" bindtap="mouseDown" canvas-id="handWriting"></canvas>
+  </view>
+</view>

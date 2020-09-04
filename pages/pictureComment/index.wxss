@@ -1,0 +1,174 @@
+page {
+  background: #fbfbfb;
+  height: 100%;
+  overflow: hidden;
+}
+
+.picture-root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.body {
+  flex: 1 1 auto;
+  width: 100%;
+  position: relative;
+}
+/* 画布背景 */
+.pictureViewer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  z-index: 1;
+}
+/* 画布 */
+.canvas_area {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  z-index: 2;
+  margin-top: -1px;
+  border-top: 1px dashed gainsboro;
+}
+.canvas_area .myCanvas {
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+}
+
+/* 正常操作 */
+.normal_tools {
+  flex: 0 0 auto;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.normal_tools button {
+  padding: 2px 10px;
+  font-size: 12px;
+  color: #666;
+  line-height: 24px;
+}
+/* 编辑状态操作 */
+.edit_tools {
+  flex: 0 0 auto;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+/* 笔粗细 */
+.penThicknessSetting {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.penThickness {
+  margin-left: 10px;
+  height: 26px;
+  width: 26px;
+  border-radius: 13px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.penThickness-inner {
+  height: 22px;
+  width: 22px;
+  border-radius: 11px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#pen1 .circle {
+  height: 5px;
+  width: 5px;
+  border-radius: 2.5px;
+  background-color: gainsboro;
+}
+#pen2 .circle {
+  height: 10px;
+  width: 10px;
+  border-radius: 5px;
+  background-color: gainsboro;
+}
+/* 颜色设置 */
+.penColorSetting {
+  margin-left: 6px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.penColor {
+  margin-left: 10px;
+  height: 26px;
+  width: 26px;
+  border-radius: 13px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.penColor-inner {
+  height: 22px;
+  width: 22px;
+  border-radius: 11px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.colorValue {
+  height: 16px;
+  width: 16px;
+  border-radius: 8px;
+}
+#color1 .penColor-inner .colorValue {
+  background-color: red;
+}
+#color2 .penColor-inner .colorValue {
+  background-color: #fea700;
+}
+
+/* 保存操作 */
+.operationsContainer {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.operationsContainer button {
+  margin-left: 4px;
+  padding: 2px 10px;
+  font-size: 12px;
+  color: #666;
+}
+.operation {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+.operation image {
+  width: 20px;
+  height: 20px;
+}
+.subBtn {
+  background: #008ef6;
+}
+
+.selectedBorder {
+  background-color: rgb(89, 238, 89);
+}
+.selectedBackground {
+  background-color: gainsboro;
+}
