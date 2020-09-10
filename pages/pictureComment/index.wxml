@@ -51,9 +51,7 @@
             </swiper>
         </view>
         <view class="canvas_area" style="display:{{isInEdit?'flex':'none'}}">
-            <canvas canvas-id='{{canvasId}}' class="myCanvas" disable-scroll="false" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd">
-                <!-- <image class="pictureViewer" src="{{imagePath}}" /> -->
-            </canvas>
+            <canvas canvas-id='{{canvasId}}' class="myCanvas" disable-scroll="false" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd"></canvas>
         </view>
     </view>
 </view>
