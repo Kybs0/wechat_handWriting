@@ -2,7 +2,7 @@
 <view class="picture-root">
     <view class="normal_tools" style="display:{{isInEdit?'none':'flex'}}">
         <button bind:tap="startEdit">批注</button>
-        <button bind:tap="exportPng" style="display:{{imagePath==originalImagePath?'none':'flex'}}">
+        <button bind:tap="exportPng" style="display:{{editImages[imageIndex]==originalImages[imageIndex]?'none':'flex'}}">
             导出
         </button>
     </view>
@@ -43,7 +43,13 @@
         </view>
     </view>
     <view class="body">
-        <image class="pictureViewer" src="{{imagePath}}" style="display:{{isInEdit?'none':'flex'}}" />
+        <view class="pictureViewer" style="display:{{isInEdit?'none':'flex'}}">
+            <swiper duration="200" bindchange="onImageChange" indicator-dots="{{true}}" indicator-color="rgba(0, 0, 0, .3)" indicator-active-color="rgba(255, 255, 255, .6)">
+                <swiper-item wx:for="{{editImages}}" wx:for-item="image" wx:for-index="index">
+                    <image class="pictureViewer" src='{{image}}'></image>
+                </swiper-item>
+            </swiper>
+        </view>
         <view class="canvas_area" style="display:{{isInEdit?'flex':'none'}}">
             <canvas canvas-id='{{canvasId}}' class="myCanvas" disable-scroll="false" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd">
                 <!-- <image class="pictureViewer" src="{{imagePath}}" /> -->
