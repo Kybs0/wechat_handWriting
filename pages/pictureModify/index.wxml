@@ -4,6 +4,6 @@
         <button bind:tap="exportPng">导出</button>
     </view>
     <view class="body" bindtouchmove="touchmove" bindtouchstart="touchstart">
-        <image class="pictureViewer" bindtouchmove="imageTouchMove" bindtouchstart="imageTouchtart" bindtouchend="imageTouchEnd" src="{{imagePath}}" style="top:{{singleTouch.top}}px;left:{{singleTouch.left}}px;width: {{  mutiTouch.scaleWidth }}px;height: {{  mutiTouch.scaleHeight }}px" bindload="bindload" />
+        <image class="pictureViewer" bindtouchmove="imageTouchMove" bindtouchstart="imageTouchtart" bindtouchend="imageTouchEnd" src="{{imagePath}}" style="top:{{singleTouch.top}}px;left:{{singleTouch.left}}px;width: {{  mutiTouch.scaleWidth }}px;height: {{  mutiTouch.scaleHeight }}px" />
     </view>
 </view>

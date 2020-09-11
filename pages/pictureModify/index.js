@@ -26,6 +26,52 @@ Page({
     touchY: 0,
     newTouchX: 0,
     newTouchY: 0,
+    onLoad: async function (options) {
+        const query = wx.createSelectorQuery()
+        query.select('.body').boundingClientRect()
+        query.selectViewport().scrollOffset()
+        query.exec(async (res) => {
+            var containerWidth = res[0].width;
+            var containerHeight = res[0].height;
+            var imageSize = await this.getImageScaleSize(this.data.imagePath, containerWidth, containerHeight);
+            this.setData({
+                'singleTouch.top': (containerHeight - imageSize.height) / 2,
+                'singleTouch.left': (containerWidth - imageSize.width) / 2,
+                'mutiTouch.baseWidth': imageSize.width,
+                'mutiTouch.baseHeight': imageSize.height,
+                'mutiTouch.scaleWidth': imageSize.width,
+                'mutiTouch.scaleHeight': imageSize.height
+            })
+        })
+    },
+    getImageScaleSize: async function (imagePath, containerWidth, containerHeight) {
+        var imageSizeInfo = { width: 0, height: 0 };
+        //原始宽高
+        var imageInfo = await wx.getImageInfo({
+            src: imagePath
+        });
+        var originalWidth = imageInfo.width;
+        var originalHeight = imageInfo.height;
+        var originalScale = originalHeight / originalWidth;
+        console.log('originalWidth: ' + originalWidth + '，originalHeight: ' + originalHeight + '，originalScale: ' + originalScale);
+
+        var windowscale = containerHeight / containerWidth;
+        console.log('containerWidth: ' + containerWidth + 'containerHeight: ' + containerHeight + '，windowscale: ' + windowscale);
+
+        if (originalScale < windowscale) {
+            //图片高宽比小于屏幕高宽比
+            //图片缩放后的宽为屏幕宽
+            imageSizeInfo.width = containerWidth;
+            imageSizeInfo.height = (containerWidth * originalHeight) / originalWidth;
+        } else {
+            //图片高宽比大于屏幕高宽比
+            //图片缩放后的高为屏幕高
+            imageSizeInfo.height = containerHeight;
+            imageSizeInfo.width = (containerHeight * originalWidth) / originalHeight;
+        }
+        console.log('缩放后的宽: ' + imageSizeInfo.width + '缩放后的高: ' + imageSizeInfo.height + '，windowscale: ' + windowscale);
+        return imageSizeInfo;
+    },
     touchstart: function (e) {
         // 单手指缩放开始，也不做任何处理 
         if (e.touches.length == 1) {
@@ -102,16 +148,5 @@ Page({
                 'singleTouch.left': this.data.singleTouch.left + movedX,
             })
         }
-    },
-    bindload: function (e) {
-        // bindload 这个api是<image>组件的api类似<img>的onload属性 
-        this.setData({
-            'singleTouch.top': 0,
-            'singleTouch.left': 0,
-            'mutiTouch.baseWidth': e.detail.width,
-            'mutiTouch.baseHeight': e.detail.height,
-            'mutiTouch.scaleWidth': e.detail.width,
-            'mutiTouch.scaleHeight': e.detail.height
-        })
     }
 })
