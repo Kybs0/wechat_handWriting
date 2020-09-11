@@ -5,20 +5,65 @@ Page({
      */
     data: {
         canvasId: 'myCanvas',
-        isClear: false,
         penColor: 'red',
         lineWidth: 5,
         isInEdit: false,
-        originalImages: ['./images/image1.png', './images/image2.png', './images/image3.png', './images/image4.png'],
-        editImages: ['./images/image1.png', './images/image2.png', './images/image3.png', './images/image4.png'],
-        imageIndex: 0
+        originalImages: ['./images/image1.png', './images/image2.png', './images/image3.png', './images/image4.png', './images/image5.png'],
+        editImages: ['./images/image1.png', './images/image2.png', './images/image3.png', './images/image4.png', './images/image5.png'],
+        imageIndex: 0,
+        adjustedImageHeight: 0,
+        adjustedImageWidth: 0
     },
-    onImageChange: function (params) {
+    onLoad: async function (options) {
+        await this.updateImageScaleInfo(0);
+    },
+    updateImageScaleInfo: function (imageIndex) {
+        const query = wx.createSelectorQuery()
+        query.select('.body').boundingClientRect()
+        query.selectViewport().scrollOffset()
+        query.exec(async (res) => {
+            var containerWidth = res[0].width;
+            var containerHeight = res[0].height;
+            var imageSize = await this.getImageScaleSize(this.data.editImages[imageIndex], containerWidth, containerHeight);
+            this.setData({
+                imageIndex: imageIndex,
+                adjustedImageWidth: imageSize.width,
+                adjustedImageHeight: imageSize.height
+            })
+        })
+    },
+    getImageScaleSize: async function (imagePath, containerWidth, containerHeight) {
+        var imageSizeInfo = { width: 0, height: 0 };
+        //原始宽高
+        var imageInfo = await wx.getImageInfo({
+            src: imagePath
+        });
+        var originalWidth = imageInfo.width;
+        var originalHeight = imageInfo.height;
+        var originalScale = originalHeight / originalWidth;
+        console.log('originalWidth: ' + originalWidth + '，originalHeight: ' + originalHeight + '，originalScale: ' + originalScale);
+
+        var windowscale = containerHeight / containerWidth;
+        console.log('containerWidth: ' + containerWidth + 'containerHeight: ' + containerHeight + '，windowscale: ' + windowscale);
+
+        if (originalScale < windowscale) {
+            //图片高宽比小于屏幕高宽比
+            //图片缩放后的宽为屏幕宽
+            imageSizeInfo.width = containerWidth;
+            imageSizeInfo.height = (containerWidth * originalHeight) / originalWidth;
+        } else {
+            //图片高宽比大于屏幕高宽比
+            //图片缩放后的高为屏幕高
+            imageSizeInfo.height = containerHeight;
+            imageSizeInfo.width = (containerHeight * originalWidth) / originalHeight;
+        }
+        console.log('缩放后的宽: ' + imageSizeInfo.width + '缩放后的高: ' + imageSizeInfo.height + '，windowscale: ' + windowscale);
+        return imageSizeInfo;
+    },
+    onImageChange: async function (params) {
         console.log('onImageChange', params)
         var curretnImageIndex = params.detail.current;
-        this.setData({
-            imageIndex: curretnImageIndex,
-        });
+        await this.updateImageScaleInfo(curretnImageIndex);
     },
     startEdit: function (params) {
         this.startNewCanvasContext(this.data.editImages[this.data.imageIndex]);
@@ -41,15 +86,13 @@ Page({
     },
     endEdit: function (params) {
         this.setData({
-            isClear: false,
             isInEdit: false,
         });
     },
     startNewCanvasContext: function (imagePath) {
         //每次编辑，新建一个context
         this.context = wx.createCanvasContext(this.data.canvasId)
-        var systemInfo = wx.getSystemInfoSync();
-        this.context.drawImage(imagePath, 0, 0, systemInfo.windowWidth, systemInfo.windowHeight - 50);
+        this.context.drawImage(imagePath, 0, 0, this.data.adjustedImageWidth, this.data.adjustedImageHeight);
         this.context.draw();
     },
     /**
@@ -59,7 +102,6 @@ Page({
         var lineWidth = options.currentTarget.dataset.param;
         console.log("lineWidth:" + lineWidth);
         this.setData({
-            isClear: false,
             lineWidth: lineWidth,
         });
     },
@@ -70,17 +112,7 @@ Page({
         var penColor = options.currentTarget.dataset.param;
         console.log("penColor:" + penColor);
         this.setData({
-            isClear: false,
             penColor: penColor,
-        });
-    },
-    /**
-     * 清除涂鸦信息
-     */
-    clearCanvas: function (options) {
-        console.log("clearCanvas");
-        this.setData({
-            isClear: !this.data.isClear
         });
     },
     // 撤销
@@ -95,21 +127,19 @@ Page({
     // 保存修改
     saveWriting: function (params) {
         var that = this;
-        var systemInfo = wx.getSystemInfoSync();
         wx.canvasToTempFilePath({
             x: 0,
             y: 0,
-            width: systemInfo.windowWidth,// 画布的宽
-            height: systemInfo.windowHeight - 50,// 画布的高
-            destWidth: systemInfo.windowWidth,
-            destHeight: systemInfo.windowHeight - 50,
+            width: that.data.adjustedImageWidth,// 画布的宽
+            height: that.data.adjustedImageHeight,// 画布的高
+            destWidth: that.data.djustedImageWidth,
+            destHeight: that.data.adjustedImageHeight,
             canvasId: this.data.canvasId,
             success(res) {
                 console.log('saveWriting-success:', res.tempFilePath);
                 // 1-保存至缓存并退出编辑状态
                 that.data.editImages[that.data.imageIndex] = res.tempFilePath;
                 that.setData({
-                    isClear: false,
                     isInEdit: false,
                     editImages: that.data.editImages
                 })

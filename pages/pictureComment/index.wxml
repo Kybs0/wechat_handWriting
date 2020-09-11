@@ -32,10 +32,6 @@
             </view>
         </view>
         <view class="operationsContainer">
-            <!-- 擦除有一定缺陷，只能使用一定颜色进行擦除 -->
-            <!-- <view class="operation {{isClear?'selectedBackground':''}}" bindtap="clearCanvas">
-                <image src='./images/eraser.png'></image>
-            </view> -->
             <button catchtap="revertWriting" class="revertBtn">撤销</button>
             <button catchtap="resetWriting" class="resetBtn">重置</button>
             <button catchtap="endEdit">退出</button>
@@ -46,12 +42,12 @@
         <view class="pictureViewer" style="display:{{isInEdit?'none':'flex'}}">
             <swiper duration="200" bindchange="onImageChange" indicator-dots="{{true}}" indicator-color="rgba(0, 0, 0, .3)" indicator-active-color="rgba(255, 255, 255, .6)">
                 <swiper-item wx:for="{{editImages}}" wx:for-item="image" wx:for-index="index">
-                    <image class="pictureViewer" src='{{image}}'></image>
+                    <image src='{{image}}' style='width:{{adjustedImageWidth}}px;height:{{adjustedImageHeight}}px'></image>
                 </swiper-item>
             </swiper>
         </view>
         <view class="canvas_area" style="display:{{isInEdit?'flex':'none'}}">
-            <canvas canvas-id='{{canvasId}}' class="myCanvas" disable-scroll="false" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd"></canvas>
+            <canvas style='width:{{adjustedImageWidth}}px;height:{{adjustedImageHeight}}px' canvas-id='{{canvasId}}' class="myCanvas" disable-scroll="false" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd"></canvas>
         </view>
     </view>
 </view>

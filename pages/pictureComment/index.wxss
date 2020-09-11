@@ -12,34 +12,36 @@ page {
 .body {
   flex: 1 1 auto;
   width: 100%;
-  position: relative;
 }
-/* 画布背景 */
+/* 预览 */
 .pictureViewer {
-  width: 100%;
+  width: 100vw;
   height: 100%;
-  position: absolute;
-  top: 0px;
-  z-index: 1;
+  text-align: center;
 }
 .pictureViewer swiper {
   width: 100%;
   height: 100%;
 }
+.pictureViewer swiper swiper-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+}
+.pictureViewer swiper swiper-item image {
+  display: block;
+}
 /* 画布 */
 .canvas_area {
   width: 100%;
   height: 100%;
-  position: absolute;
-  top: 0px;
-  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
   margin-top: -1px;
   border-top: 1px dashed gainsboro;
-}
-.canvas_area .myCanvas {
-  height: 100%;
-  width: 100%;
-  background-color: transparent;
 }
 
 /* 正常操作 */
